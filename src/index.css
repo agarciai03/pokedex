@@ -1,21 +1,42 @@
+/* Importamos todo Tailwind (versión 4) */
 @import "tailwindcss";
 
-/* Ajustes globales básicos */
+/* 1. IMPORTAMOS LAS FUENTES OFICIALES Y MODERNAS */
+@import url('https://fonts.cdnfonts.com/css/pokemon-solid');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
+
 html,
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #f3f4f6;
-  /* Fondo gris claro elegante */
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  /* Fondo base más vibrante */
+  background-color: #f6f8fc;
+  /* Patrón de puntos sutil (Textura estilo Pokédex/Anime) */
+  background-image: radial-gradient(#d1d5db 2px, transparent 2px);
+  background-size: 30px 30px;
+
+  /* Fuente para toda la página (Nunito es muy redondita y amigable, estilo Nintendo) */
+  font-family: 'Nunito', system-ui, -apple-system, sans-serif;
   scroll-behavior: smooth;
-  /* Para que al navegar la página baje suavemente */
+  overscroll-behavior-y: none;
 }
 
-/* =========================================
-  SCROLLBAR PERSONALIZADA (Estilo Pro)
-   ========================================= */
+.font-pokemon {
+  font-family: 'Pokemon Solid', sans-serif;
+  letter-spacing: 3px;
+}
+
+/* El efecto exacto del logo clásico (Letra amarilla, borde azul fuerte) */
+.text-pokemon-logo {
+  color: #ffcb05;
+  /* Pokémon Yellow */
+  -webkit-text-stroke: 3px #3b4cca;
+  /* Pokémon Blue */
+  text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+  /* Sombra para darle volumen */
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -37,4 +58,89 @@ body {
 .no-select {
   user-select: none;
   -webkit-user-select: none;
+}
+
+.card-holo-effect {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  /* Respeta el borde redondeado de la carta */
+  transform-style: preserve-3d;
+  /* Ayuda a que el efecto 3D de Tilt se vea mejor */
+}
+
+/* La capa de arcoíris invisible por defecto */
+.card-holo-effect::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: linear-gradient(105deg,
+      transparent 20%,
+      rgba(255, 100, 100, 0.4) 25%,
+      rgba(100, 255, 100, 0.4) 30%,
+      rgba(100, 100, 255, 0.4) 35%,
+      rgba(255, 255, 100, 0.4) 40%,
+      transparent 50%);
+  background-size: 300% 300%;
+  background-position: 100% 100%;
+  mix-blend-mode: color-dodge;
+  /* ¡Esta es la clave para que parezca tinta metalizada! */
+  opacity: 0;
+  transition: opacity 0.3s ease, background-position 0.3s ease;
+  pointer-events: none;
+  /* Evita que el arcoíris bloquee el clic del ratón */
+}
+
+/* Al poner el ratón encima, el arcoíris aparece y se desliza */
+.card-holo-effect:hover::after {
+  opacity: 0.8;
+  background-position: 0% 0%;
+  transition: opacity 0.3s ease, background-position 2s ease-out;
+}
+
+.hacked-screen {
+  animation: glitch-anim 0.2s linear infinite, color-shift 2s infinite alternate;
+  pointer-events: none;
+  /* Para no bloquear la web entera */
+}
+
+@keyframes glitch-anim {
+  0% {
+    transform: translate(0)
+  }
+
+  20% {
+    transform: translate(-3px, 3px) skewX(2deg)
+  }
+
+  40% {
+    transform: translate(-3px, -3px) skewX(-2deg)
+  }
+
+  60% {
+    transform: translate(3px, 3px) skewX(2deg)
+  }
+
+  80% {
+    transform: translate(3px, -3px) skewX(-2deg)
+  }
+
+  100% {
+    transform: translate(0)
+  }
+}
+
+@keyframes color-shift {
+  0% {
+    filter: hue-rotate(0deg) invert(0%);
+  }
+
+  50% {
+    filter: hue-rotate(90deg) invert(20%);
+  }
+
+  100% {
+    filter: hue-rotate(180deg) invert(100%);
+  }
 }

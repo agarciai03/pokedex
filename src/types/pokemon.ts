@@ -17,6 +17,18 @@ export interface PokemonDetail {
     height: number;
     types: { type: { name: string } }[];
     stats: { base_stat: number; stat: { name: string } }[];
+    cries: {
+        latest: string;
+        legacy: string;
+    };
+    sprites: {
+        other: {
+            'official-artwork': {
+                front_default: string;
+                front_shiny: string;
+            };
+        };
+    };
 }
 
 export const extractPokemonId = (url: string): string => {
